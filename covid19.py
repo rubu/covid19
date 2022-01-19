@@ -32,6 +32,7 @@ if (len(data_interval_result) == 0):
     quit()
 
 for vaccination_stage in vaccine_stage_result:
-    group_size_query = f'SELECT SUM("Vakcinēto personu skaits") from "9320d913-a4a2-4172-b521-73e58c2cfe83" WHERE "Vakcinācijas posms" = "{vaccination_stage["Vakcinācijas posms"]}"'
+    vaccination_stage_name = vaccination_stage["Vakcinācijas posms"]
+    group_size_query = f'SELECT SUM("Vakcinēto personu skaits") from "9320d913-a4a2-4172-b521-73e58c2cfe83" WHERE "Vakcinācijas posms" = \'{vaccination_stage_name}\''
     group_size_result = execute_sql_query(group_size_query)
-    print(group_size_result)
+    print(f'{vaccination_stage_name}: {group_size_result[0]["sum"]}')
